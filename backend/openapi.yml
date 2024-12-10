@@ -1,0 +1,40 @@
+openapi: 3.0.1
+info:
+  title: gin api sample
+  version: 1.0.0
+paths:
+  '/sample':
+    get:
+      parameters:
+        - $ref: '#/components/parameters/sampleParam1'
+      responses:
+        '200':
+          description: Sampleの取得成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SampleArray'
+        '400':
+          description: 不正なリクエストです。
+        '401':
+          description: 認証エラーです。
+
+components:
+  parameters:
+    sampleParam1:
+      in: query
+      name: param1
+      schema:
+        type: string
+      required: false
+  schemas:
+    SampleArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/SampleResponse'
+    SampleResponse:
+      type: object
+      properties:
+        value:
+          type: string
+
