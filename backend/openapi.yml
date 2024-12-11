@@ -1,40 +1,169 @@
 openapi: 3.0.1
 info:
-  title: gin api sample
-  version: 1.0.0
+  title: Animal Park API
+  description: APIs for Animal Park, an e-commerce site.
+  version: v1.0.0-2024.12.12
 paths:
-  '/sample':
+  /products:
     get:
+      summary: Get product list by category
+      description: Returns a list of products filtered by category. 
       parameters:
-        - $ref: '#/components/parameters/sampleParam1'
+        - $ref: '#/components/parameters/category_id'
       responses:
         '200':
-          description: Sampleの取得成功
+          description: A list of products for the specified category.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SampleArray'
+                $ref: '#/components/schemas/ProductListResponse'
         '400':
-          description: 不正なリクエストです。
+          description: '#/components/schemes/BadRequest'
         '401':
-          description: 認証エラーです。
-
+          description: '#/components/schemes/NotFound'
+  /products/{product_id}:
+    get:
+      summary: Get product details by product ID
+      description: Returns detailed information for a specific product.
+      parameters:
+        - $ref: '#/components/parameters/product_id'
+      responses:
+        '200':
+          description: Detailed information about the product
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductDetailResponse'
+        '400':
+          description: '#/components/schemas/BadRequest'
+        '401':
+          description: '#/components/schemas/NotFound'
 components:
   parameters:
-    sampleParam1:
+    category_id:
+      name: category_id
       in: query
-      name: param1
+      required: true
+      description: The ID of the category to filter products.
       schema:
-        type: string
-      required: false
+        type: integer
+        example: 1
+    product_id:
+      name: product_id
+      in: path
+      required: true
+      description: The ID of the product to fetch details for.
+      schema:
+        type: integer
+        example: 101
   schemas:
-    SampleArray:
-      type: array
-      items:
-        $ref: '#/components/schemas/SampleResponse'
-    SampleResponse:
+    Product:
       type: object
       properties:
-        value:
+        product_id:
+          type: integer
+          example: 101
+        product_name:
           type: string
-
+          example: "Simple Gorilla"
+        price:
+          type: integer
+          format: float
+          example: 45000
+        image_url:
+          type: string
+          example: "https://example.com/images/simple_gorilla.jpg"
+        stock_quantity:
+          type: integer
+          example: 50
+        availability:
+          type: string
+          example: "In Stock"
+        rating:
+          type: number
+          format: float
+          example: 4.5
+        tags:
+          type: array
+          items:
+            type: string
+          example: ["New Arrival", "Best Seller"]
+    ProductListResponse:
+      type: object
+      properties:
+        category_id:
+          type: integer
+          example: 1
+        category_name:
+          type: string
+          example: "Simple Animal"
+        proucts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+    ProductDetailResponse:
+      type: object
+      properties:
+        product_id:
+          type: integer
+          example: 101
+        product_name:
+          type: string
+          example: "Simple Gorilla"
+        product_description:
+          type: string
+          example: "Simple Gorilla image"
+        price:
+          type: integer
+          example: 45000
+        image_url:
+          type: string
+          example: "https://example.com/images/simple_gorilla.jpg"
+        stock_quantity:
+          type: integer
+          example: 50
+        availability:
+          type: string
+          example: "In Stock"
+        reviews:
+          type: array
+          items:
+            type: object
+            properties:
+              user:
+                type: string
+                example: "Love Muscle"
+              rating:
+                type: number
+                format: float
+                example: 4.8
+              comment:
+                type: string
+                example: "Excellent Muscle!!"
+        related_products:
+          type: array
+          items:
+            type: integer
+            example: [101, 102]
+        
+  responses:
+    BadRequest:
+      description: Invalid category ID provided.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Invalid category ID"
+    NotFound:
+      description: Invalid category ID provided.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Category not found"
