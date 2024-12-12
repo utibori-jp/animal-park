@@ -54,7 +54,7 @@ type ProductDetailResponse struct {
 type ProductListResponse struct {
 	CategoryId   *int       `json:"category_id,omitempty"`
 	CategoryName *string    `json:"category_name,omitempty"`
-	Proucts      *[]Product `json:"proucts,omitempty"`
+	Products     *[]Product `json:"products,omitempty"`
 }
 
 // CategoryId defines model for category_id.
@@ -349,12 +349,12 @@ var swaggerSpec = []string{
 	"S9wHpOxjjXQIpRXkv/VgRreXQaqqXNZZnS/o4qkSik7rfZsMwSSxdj2zL/AZv7GJtXIrCuDwAR2xeywK",
 	"tPDAQRKWweEMdHMgrBW7IYLxliPTsC/umlH+YRlzueW9MbrceRZwDOd8M6ZhIQjzRfvKeP9Di4+c8JlH",
 	"yfhhkEG9vvuQW4nf+pH6Dc50WTar7oj19++ZJ5ki9mflsgLfvbt6Mn69ZjIqhyd78pPeYpPsmgV5ftNX",
-	"DtsLI/FJOro8ECcC4qWXnB+NL9JhomQZRnuId2ck+NniClL4KT5KnLjZ+3G79K+Yfn8k1Uqfq4vJfBa0",
-	"Q4OLzYX9yplQDN8HotgMmZOEXluQpHCTjimbzGfAYYvW1fG2oyiJkvfjZHwTjcbRaOzhaYNKGAkp/BIl",
-	"0Qh4UCjhgnGX+2ukc4R3SJVVjglWSEdeB7UujUjDnC13h3fSA/XtCw/4LIcUPiLN2yS8pw6/DBf4aBJ3",
-	"m79/OJFA4yR5lXa4opk9Kg6ogslAEbQNytAZzORKYt4pxZ7DTQ2yH+YcArq4o+iC3+hKv4OOCqKkKkth",
-	"d3XZD2o1gO40KZgeWh8/H1fu/h95UAtezJkntN87UqtQBNGWIGvzvsiF5nOWv5oUnQfiLThx8mIPsGI6",
-	"VBKx1BV1/zO8gg3iX7JBXMWG9i/Lcnc4mk39vfZ/BwAA//8lXM3Oyw0AAA==",
+	"DtsLI/FJOro8ECcC4qWXnB+NL9JhomQZRvsS7/q9+9niClL4KT5qnLhZ/HG79a8Yf38k1Uqfy4vJfBbE",
+	"QwOMzYX9yplQDN8HptgMmZOEXlyQpHCVjimbzGfAYYvW1fG2oyiJkvfjZHwTjcbRaOzhaYNKGAkp/BIl",
+	"0Qh4kCjhgnH32mukc4R3SJVVjglWSEdeCLUujUrDnC13h4fSA/X9Cy/4LIcUPiLN2yS8Jw+/DBf4aBJ3",
+	"u79/ONFA4yR5lXi4opk9Lg7IgslAEbQN0tAZzORKYt4pxZ7DTQ2yH+YcArq4I+mC3+hKv4OQCqqkKkth",
+	"d3XZD3I1gO40KZgeWh8/H3fu/h95UCtezJkntF88UqtQBNGWIGvzvsiF5nOWv5oUnRfiLThx8mQPsGI6",
+	"VBKx1BV1/zS8gg3iX7JBXMWG9j/Lcnc4mk39vfZ/BwAA///gKa7GzA0AAA==",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file
