@@ -97,7 +97,7 @@ components:
         category_name:
           type: string
           example: "Simple Animal"
-        proucts:
+        products:
           type: array
           items:
             $ref: '#/components/schemas/Product'
