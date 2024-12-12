@@ -8,7 +8,7 @@ import (
 
 func main() {
 	r := gin.Default()
-	server := &api.SampleServer{
+	server := &api.ProductsServer{
 		ServerId: 1, // Sample Value
 	}
 	api.RegisterHandlers(r, server)
