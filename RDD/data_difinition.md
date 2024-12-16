@@ -56,13 +56,32 @@
 | `user_id`          | INT (FK)        | 商品をアップロードしたユーザーID（`User_id` と関連）       |
 | `title`            | VARCHAR         | 商品タイトル                                        |
 | `price`            | DECIMAL(10, 2)  | 商品の価格                                          |
+| `sample_file_path` | VARCHAR         | サンプル商品（画像）のファイルパス                             |
 | `file_path`        | VARCHAR         | 商品（画像）のファイルパス                             |
 | `description`      | TEXT            | 商品の説明                                           |
-| `download_count`   | INT             | 商品のダウンロード回数                                   |
+| `availability`     | VARCHAR         | 商品のステータス（購入可能、売り切れ、販売中止等）  |
 | `created_at`       | TIMESTAMP       | 商品のアップロード日時                                  |
 | `updated_at`       | TIMESTAMP       | 商品情報の更新日時                                    |
-
 ---
+
+#### 4. **m_tags（タグマスタ）**
+- 商品に関連つけるタグの種類を管理します。
+| 属性名              | データ型        | 説明                                              |
+|--------------------|-----------------|--------------------------------------------------|
+| `tag_id`      | INT (PK)        | タグID（ユニーク識別子）                                |
+| `tag_name`    | INT (FK)        | タグ名（`tag_id` と関連）                               |
+| `created_at`       | TIMESTAMP       | タグが作成された日時                               |
+| `updated_at`       | TIMESTAMP       | タグ情報が更新された日時                           |
+
+#### 4. **product_tags（商品タグトラン）**
+- 商品に関連つけるタグの種類を管理します。
+| 属性名              | データ型        | 説明                                              |
+|--------------------|-----------------|--------------------------------------------------|
+| `product_tags_id`      | INT (PK)        | 商品タグID（ユニーク識別子）                       |
+| `product_id`      | INT (FK)        | 商品ID（`product_id`と関連）                       |
+| `tag_id`    | INT (FK)        | タグID（`tag_id` と関連）                               |
+| `created_at`       | TIMESTAMP       | 商品タグトランが作成された日時                               |
+| `updated_at`       | TIMESTAMP       | 商品タグトランが更新された日時                           |
 
 #### 4. **Stock (在庫)**
 - 商品の在庫数を管理するためのエンティティです。このテーブルでは、各商品が現在いくつ在庫として存在するのか、どの倉庫に保管されているのかを管理します。
