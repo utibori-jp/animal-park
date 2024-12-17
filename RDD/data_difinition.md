@@ -218,82 +218,128 @@
 <!-- TODO:ER図がすごく見づらいから、他のものを使ってER図を作成して画像を貼り付ける方法に変更する。 -->
 ```mermaid
 erDiagram
-    USER {
-        INT id PK
+    Users {
+        INT user_id PK
         VARCHAR name
         VARCHAR email
         VARCHAR password
         DECIMAL currency_balance
+        INT status_id FK
         TIMESTAMP created_at
         TIMESTAMP updated_at
     }
-    
-    BRAND {
-        INT id PK
+    User_Statuses {
+        INT status_id PK
+        VARCHAR status
+        VARCHAR description
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
+    }
+    Brands {
+        INT brand_id PK
         INT user_id FK
         VARCHAR name
-        TEXT description
+        VARCHAR description
         TIMESTAMP created_at
         TIMESTAMP updated_at
     }
-
-    PRODUCT {
-        INT id PK
+    Products {
+        INT product_id PK
         INT brand_id FK
         INT user_id FK
         VARCHAR title
         DECIMAL price
+        VARCHAR sample_file_path
         VARCHAR file_path
-        TEXT description
-        INT download_count
+        VARCHAR description
+        INT product_status_id FK
         TIMESTAMP created_at
         TIMESTAMP updated_at
     }
-
-    REVIEW {
-        INT id PK
+    Product_statuses {
+        INT product_status_id PK
+        VARCHAR status
+        VARCHAR description
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
+    }
+    Tags {
+        INT tag_id PK
+        VARCHAR tag_name
+        VARCHAR description
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
+    }
+    Products_tags {
+        INT product_tags_id PK
+        INT product_id FK
+        INT tag_id FK
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
+    }
+    Product_Stocks {
+        INT stock_id PK
+        INT product_id FK
+        INT quantity
+        TIMESTAMP last_updated
+    }
+    Product_Comments {
+        INT comment_id PK
         INT product_id FK
         INT user_id FK
         INT rating
-        TEXT comment
+        VARCHAR comment
         TIMESTAMP created_at
     }
-
-    CURRENCY_TRANSACTION {
-        INT id PK
+    Currency_Transactions {
+        INT curr_trans_id PK
         INT user_id FK
-        ENUM transaction_type
+        INT trans_type_id FK
         DECIMAL amount
-        INT related_product_id FK
         TIMESTAMP created_at
     }
-
-    DOWNLOAD {
-        INT id PK
-        INT user_id FK
-        INT product_id FK
-        TIMESTAMP download_date
-        DECIMAL currency_spent
-    }
-
-    USER_SETTING {
-        INT id PK
-        INT user_id FK
-        VARCHAR setting_name
-        VARCHAR setting_value
+    Trans_types {
+        INT trans_type_id PK
+        VARCHAR trans_type
+        VARCHAR description
         TIMESTAMP created_at
         TIMESTAMP updated_at
     }
+    Upload_histories {
+        INT upload_id PK
+        INT user_id FK
+        INT product_id FK
+        INT initial_quantity
+        TIMESTAMP upload_date
+    }
+    Download_histories {
+        INT download_id PK
+        INT transaction_id PK
+        INT user_id FK
+        INT product_id FK
+        INT product_seq FK
+        DECIMAL price
+        TIMESTAMP download_date
+    }
 
-    | USER    | | --o | BRAND : has                       |
-    | BRAND   | | --o | PRODUCT : owns                    |
-    | USER    | | --o | PRODUCT : uploads                 |
-    | PRODUCT | | --o | REVIEW : receives                 |
-    | USER    | | --o | REVIEW : writes                   |
-    | USER    | | --o | CURRENCY_TRANSACTION : performs   |
-    | PRODUCT | | --o | CURRENCY_TRANSACTION : related_to |
-    | USER    | | --o | DOWNLOAD : downloads              |
-    | PRODUCT | | --o | DOWNLOAD : related_to             |
-    | USER    | | --o | USER_SETTING : customizes         |
+    Users ||--o| User_Statuses : "has"
+    Users ||--o| Brands : "owns"
+    Users ||--o| Products : "uploads"
+    Users ||--o| Product_Comments : "comments"
+    Users ||--o| Currency_Transactions : "performs"
+    Brands ||--o| Products : "owns"
+    Brands ||--o| Users : "belongs to"
+    Products ||--o| Product_statuses : "has"
+    Products ||--o| Products_tags : "tagged as"
+    Products ||--o| Product_Stocks : "has"
+    Products ||--o| Product_Comments : "has"
+    Products ||--o| Download_histories : "downloaded"
+    Tags ||--o| Products_tags : "tags"
+    Product_statuses ||--o| Products : "status"
+    Trans_types ||--o| Currency_Transactions : "defines"
+    Product_Stocks ||--o| Products : "stocks"
+    Upload_histories ||--o| Products : "uploads"
+    Download_histories ||--o| Products : "downloads"
+
 ```
 
