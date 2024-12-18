@@ -8,6 +8,7 @@ CREATE TABLE products (
     file_path VARCHAR(300) NOT NULL,
     description VARCHAR(500),
     product_status_id INTEGER ,
+    product_seq INTEGER DEFAULT 1,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 

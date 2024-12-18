@@ -76,6 +76,7 @@
 | `file_path`         | VARCHAR(300)   | 商品（画像）のファイルパス                           | NOT NULL                                                                           |
 | `description`       | VARCHAR(500)   | 商品の説明                                           |                                                                                    |
 | `product_status_id` | INT（FK）      | 商品ステータスID（`product_status_id`）              | FOREIGN KEY (`product_status_id`) REFERENCES Product_statuses(`product_status_id`) |
+| `product_seq`       | INT            | 商品通番                                             | DEFAULT 1                                                                          |
 | `created_at`        | TIMESTAMP      | 商品のアップロード日時                               | DEFAULT CURRENT_TIMESTAMP                                                          |
 | `updated_at`        | TIMESTAMP      | 商品情報の更新日時                                   | DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP                              |
 
@@ -188,15 +189,15 @@
 #### 13. **Download_histories (ダウンロード)**
 - ユーザーが商品をダウンロードした履歴を記録します。通貨額、ダウンロード日時、関連する商品（画像）などが含まれます。
 
-|      属性名      |    データ型    |                        説明                        |                                       制約                                       |
-| ---------------- | -------------- | -------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `download_id`    | INT (PK)       | ダウンロードID（ユニーク識別子）                   | PRIMARY KEY                                                                      |
-| `transaction_id` | INT (PK)       | 取引ID（ユニーク識別子）                           | PRIMARY KEY                                                                      |
-| `user_id`        | INT (FK)       | ダウンロードを行ったユーザーID（`User_id` と関連） | FOREIGN KEY (`user_id`) REFERENCES Users(`user_id`) ON DELETE CASCADE            |
-| `product_id`     | INT (FK)       | 商品ID（`Product.id` と関連）                      | FOREIGN KEY (`product_id`) REFERENCES Products(`product_id`) ON DELETE CASCADE   |
-| `product_seq`    | INT            | 商品連番（`Product.product_seq` と関連）           | FOREIGN KEY (`product_seq`) REFERENCES Products(`product_seq`) ON DELETE CASCADE |
-| `price`          | DECIMAL(10, 2) | 取引時の商品の通貨額                               | CHECK (`price` >= 0)                                                             |
-| `download_date`  | TIMESTAMP      | ダウンロード日時                                   | DEFAULT CURRENT_TIMESTAMP                                                        |
+|      属性名      |    データ型    |                        説明                        |                                      制約                                      |
+| ---------------- | -------------- | -------------------------------------------------- | ------------------------------------------------------------------------------ |
+| `download_id`    | INT (PK)       | ダウンロードID（ユニーク識別子）                   | PRIMARY KEY                                                                    |
+| `transaction_id` | INT (PK)       | 取引ID（ユニーク識別子）                           | PRIMARY KEY                                                                    |
+| `user_id`        | INT (FK)       | ダウンロードを行ったユーザーID（`User_id` と関連） | FOREIGN KEY (`user_id`) REFERENCES Users(`user_id`) ON DELETE CASCADE          |
+| `product_id`     | INT (FK)       | 商品ID（`Product.id` と関連）                      | FOREIGN KEY (`product_id`) REFERENCES Products(`product_id`) ON DELETE CASCADE |
+| `product_seq`    | INT            | ダウンロード時の商品通番                           |                                                                                |
+| `price`          | DECIMAL(10, 2) | 取引時の商品の通貨額                               | CHECK (`price` >= 0)                                                           |
+| `download_date`  | TIMESTAMP      | ダウンロード日時                                   | DEFAULT CURRENT_TIMESTAMP                                                      |
 
 ---
 
@@ -322,24 +323,24 @@ erDiagram
         TIMESTAMP download_date
     }
 
-    Users ||--o| User_Statuses : "has"
-    Users ||--o| Brands : "owns"
-    Users ||--o| Products : "uploads"
-    Users ||--o| Product_Comments : "comments"
-    Users ||--o| Currency_Transactions : "performs"
-    Brands ||--o| Products : "owns"
-    Brands ||--o| Users : "belongs to"
-    Products ||--o| Product_statuses : "has"
-    Products ||--o| Products_tags : "tagged as"
-    Products ||--o| Product_Stocks : "has"
-    Products ||--o| Product_Comments : "has"
-    Products ||--o| Download_histories : "downloaded"
-    Tags ||--o| Products_tags : "tags"
-    Product_statuses ||--o| Products : "status"
-    Trans_types ||--o| Currency_Transactions : "defines"
-    Product_Stocks ||--o| Products : "stocks"
-    Upload_histories ||--o| Products : "uploads"
-    Download_histories ||--o| Products : "downloads"
+    | Users              | | --o | User_Statuses : "has"              |
+    | Users              | | --o | Brands : "owns"                    |
+    | Users              | | --o | Products : "uploads"               |
+    | Users              | | --o | Product_Comments : "comments"      |
+    | Users              | | --o | Currency_Transactions : "performs" |
+    | Brands             | | --o | Products : "owns"                  |
+    | Brands             | | --o | Users : "belongs to"               |
+    | Products           | | --o | Product_statuses : "has"           |
+    | Products           | | --o | Products_tags : "tagged as"        |
+    | Products           | | --o | Product_Stocks : "has"             |
+    | Products           | | --o | Product_Comments : "has"           |
+    | Products           | | --o | Download_histories : "downloaded"  |
+    | Tags               | | --o | Products_tags : "tags"             |
+    | Product_statuses   | | --o | Products : "status"                |
+    | Trans_types        | | --o | Currency_Transactions : "defines"  |
+    | Product_Stocks     | | --o | Products : "stocks"                |
+    | Upload_histories   | | --o | Products : "uploads"               |
+    | Download_histories | | --o | Products : "downloads"             |
 
 ```
 
