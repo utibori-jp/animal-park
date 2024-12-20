@@ -1,6 +1,6 @@
-CREATE TABLE tags (
-    tag_id INTEGER PRIMARY KEY,
-    tag_name VARCHAR(100) UNIQUE NOT NULL,
+CREATE TABLE m_user_statuses (
+    status_id INT PRIMARY KEY,
+    status VARCHAR(50) UNIQUE NOT NULL,
     description VARCHAR(500),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP

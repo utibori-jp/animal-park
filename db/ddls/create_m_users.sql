@@ -1,4 +1,4 @@
-CREATE TABLE users (
+CREATE TABLE m_users (
     user_id INT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(50) NOT NULL UNIQUE,
@@ -8,6 +8,6 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     
-    FOREIGN KEY (status_id) REFERENCES user_statuses(status_id)
+    FOREIGN KEY (status_id) REFERENCES m_user_statuses(status_id)
 );
 

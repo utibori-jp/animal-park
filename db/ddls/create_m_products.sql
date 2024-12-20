@@ -1,4 +1,4 @@
-CREATE TABLE products (
+CREATE TABLE m_products (
     product_id INTEGER PRIMARY KEY,
     brand_id INTEGER ,
     user_id INTEGER ,
@@ -12,8 +12,8 @@ CREATE TABLE products (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
-    FOREIGN KEY (brand_id) REFERENCES brands(brand_id) ON DELETE CASCADE,
-    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
-    FOREIGN KEY (product_status_id) REFERENCES product_statuses(product_status_id)
+    FOREIGN KEY (brand_id) REFERENCES m_brands(brand_id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES m_users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (product_status_id) REFERENCES m_product_statuses(product_status_id)
 );
 
