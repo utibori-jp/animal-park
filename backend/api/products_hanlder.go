@@ -10,6 +10,33 @@ type ProductsServer struct {
 	ServerId int
 }
 
+func (server *ProductsServer) GetTest(c *gin.Context) {
+	rows, err := DB.Query("SELECT user_id, name, email FROM public.m_users")
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to query database"})
+		return
+	}
+	defer rows.Close()
+
+	var users []User
+	for rows.Next() {
+		var user User
+		err := rows.Scan(&user.UserId, &user.UserName, &user.Email)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to scan row"})
+			return
+		}
+		users = append(users, user)
+	}
+
+	if len(users) == 0 {
+		c.JSON(http.StatusNotFound, gin.H{"message": "No data found"})
+		return
+	}
+
+	c.JSON(http.StatusOK, users)
+}
+
 func (server *ProductsServer) GetProducts(c *gin.Context, params GetProductsParams) {
 	// TODO: 値をデータベースから取得するロジックを作成する。
 	availability := "In Stock"

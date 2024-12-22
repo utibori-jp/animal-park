@@ -17,7 +17,7 @@ func InitDB() error {
 	PASSWORD := "postgres"
 	HOST := "db"
 	PORT := "5432"
-	DBNAME := "db"
+	DBNAME := "postgres"
 	connStr := fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=disable", USER, PASSWORD, HOST, PORT, DBNAME)
 
 	DB, err = sql.Open("postgres", connStr)
