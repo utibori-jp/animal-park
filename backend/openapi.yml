@@ -3,9 +3,31 @@ info:
   title: Animal Park API
   description: APIs for Animal Park, an e-commerce site.
   version: v1.0.0-2024.12.12
+tags:
+  - name: check
+    description: check API
+  - name: product
+    description: APIs for managing products
 paths:
-  /products:
+  /check:
     get:
+      tags:
+        - check
+      operationId: CheckAPI
+      summary: Check API
+      description: Status Check API for development.
+      responses:
+        '200':
+          description: Check API response for DB connection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckResponse'
+  /product:
+    get:
+      tags:
+        - product
+      operationId: getProductList
       summary: Get product list by category
       description: Returns a list of products filtered by category. 
       parameters:
@@ -21,8 +43,11 @@ paths:
           description: '#/components/schemes/BadRequest'
         '401':
           description: '#/components/schemes/NotFound'
-  /products/{product_id}:
+  /product/{product_id}:
     get:
+      tags:
+        - product
+      operationId: getProductDetail
       summary: Get product details by product ID
       description: Returns detailed information for a specific product.
       parameters:
@@ -57,6 +82,22 @@ components:
         type: integer
         example: 101
   schemas:
+    User:
+      type: object
+      properties:
+        user_id:
+          type: integer
+          example: 1
+        user_name:
+          type: string
+          example: "田中　太郎"
+        email:
+          type: string
+          example: "taro.tanaka@exapmle.com"
+    CheckResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/User'
     Product:
       type: object
       properties:

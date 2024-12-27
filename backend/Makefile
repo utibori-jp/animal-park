@@ -15,9 +15,15 @@ docker-reset:
 	make -C .. docker-reset
 
 .PHONY: code-gen
+tags = product check
+
 code-gen:
 	@echo "Starting code generation with oapi-codegen..."
-	oapi-codegen -config config.yml openapi.yml
+	@set -e
+	@$(foreach tag, $(tags), \
+		echo "Generating code for $(tag)..."; \
+		oapi-codegen --include-tags $(tag) -package $(tag) -o api/$(tag)/$(tag).gen.go -config config.yml openapi.yml; \
+	)
 	@echo "Code generation completed."
 
 .PHONY: exec-bash

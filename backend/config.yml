@@ -6,4 +6,3 @@ generate:
   strict-server: true
 output-options:
   skip-prune: true
-output: ./api/api.gen.go

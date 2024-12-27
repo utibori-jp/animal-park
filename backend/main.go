@@ -1,7 +1,9 @@
 package main
 
 import (
-	"go-backend/api"
+	"go-backend/api/check"
+	"go-backend/api/postgres"
+	"go-backend/api/product"
 	"log"
 
 	"github.com/gin-gonic/gin"
@@ -9,16 +11,20 @@ import (
 
 func main() {
 	r := gin.Default()
-	server := &api.ProductsServer{
-		ServerId: 1, // Sample Value
+	checkServer := &check.CheckServer{
+		ServerId: 1,
+	}
+	productServer := &product.ProductsServer{
+		ServerId: 1,
 	}
 
-	err := api.InitDB()
+	err := postgres.InitDB()
 	if err != nil {
 		log.Fatal("\033[31mError connecting to the database:", err, "\033[0m")
 	}
-	defer api.CloseDB()
+	defer postgres.CloseDB()
 
-	api.RegisterHandlers(r, server)
+	check.RegisterHandlers(r, checkServer)
+	product.RegisterHandlers(r, productServer)
 	r.Run() // listen and serve on 0.0.0.0:8080
 }
