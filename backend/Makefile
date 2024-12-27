@@ -22,7 +22,7 @@ code-gen:
 	@set -e
 	@$(foreach tag, $(tags), \
 		echo "Generating code for $(tag)..."; \
-		oapi-codegen --include-tags $(tag) -package $(tag) -o api/$(tag)/$(tag).gen.go -config config.yml openapi.yml; \
+		docker exec -it go-backend sh -c "oapi-codegen --include-tags $(tag) -package $(tag) -o api/$(tag)/$(tag).gen.go -config config.yml openapi.yml"; \
 	)
 	@echo "Code generation completed."
 
