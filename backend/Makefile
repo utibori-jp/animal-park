@@ -16,7 +16,6 @@ docker-reset:
 
 .PHONY: code-gen
 tags = product check
-
 code-gen:
 	@echo "Starting code generation with oapi-codegen..."
 	@set -e
