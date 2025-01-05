@@ -1,0 +1,146 @@
+{
+  "images": {
+    "images": [
+      {
+        "id": 1,
+        "title": "Sunset Beach",
+        "price": 100,
+        "likes": 50,
+        "tags": [
+          "beach",
+          "sunset"
+        ],
+        "imageUrl": "lion.png"
+      },
+      {
+        "id": 2,
+        "title": "Mountain View",
+        "price": 150,
+        "likes": 75,
+        "tags": [
+          "mountain",
+          "nature"
+        ],
+        "imageUrl": "lion.png"
+      },
+      {
+        "id": 3,
+        "title": "City Lights",
+        "price": 200,
+        "likes": 100,
+        "tags": [
+          "city",
+          "night"
+        ],
+        "imageUrl": "lion.png"
+      }
+    ],
+    "recommendations": {
+      "popular": [
+        {
+          "id": 3,
+          "title": "City Lights",
+          "price": 200,
+          "likes": 100,
+          "tags": [
+            "city",
+            "night"
+          ],
+          "imageUrl": "lion.png"
+        },
+        {
+          "id": 2,
+          "title": "Mountain View",
+          "price": 150,
+          "likes": 75,
+          "tags": [
+            "mountain",
+            "nature"
+          ],
+          "imageUrl": "lion.png"
+        },
+        {
+          "id": 1,
+          "title": "Sunset Beach",
+          "price": 100,
+          "likes": 50,
+          "tags": [
+            "beach",
+            "sunset"
+          ],
+          "imageUrl": "lion.png"
+        }
+      ],
+      "newArrivals": [
+        {
+          "id": 3,
+          "title": "City Lights",
+          "price": 200,
+          "likes": 100,
+          "tags": [
+            "city",
+            "night"
+          ],
+          "imageUrl": "lion.png"
+        },
+        {
+          "id": 2,
+          "title": "Mountain View",
+          "price": 150,
+          "likes": 75,
+          "tags": [
+            "mountain",
+            "nature"
+          ],
+          "imageUrl": "lion.png"
+        }
+      ],
+      "featuredBrands": [
+        {
+          "id": 1,
+          "title": "Sunset Beach",
+          "price": 100,
+          "likes": 50,
+          "tags": [
+            "beach",
+            "sunset"
+          ],
+          "imageUrl": "lion.png"
+        }
+      ],
+      "recommendedThemes": [
+        {
+          "id": 2,
+          "title": "Mountain View",
+          "price": 150,
+          "likes": 75,
+          "tags": [
+            "mountain",
+            "nature"
+          ],
+          "imageUrl": "lion.png"
+        }
+      ]
+    }
+  },
+  "users": [
+    {
+      "id": 1,
+      "name": "Alice",
+      "email": "alice@example.com",
+      "role": "admin"
+    },
+    {
+      "id": 2,
+      "name": "Bob",
+      "email": "bob@example.com",
+      "role": "user"
+    },
+    {
+      "id": 3,
+      "name": "Charlie",
+      "email": "charlie@example.com",
+      "role": "moderator"
+    }
+  ]
+}
