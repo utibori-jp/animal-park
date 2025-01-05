@@ -4,7 +4,7 @@ import {FavoriteBorder} from '@mui/icons-material';
 
 interface ImageCardProps {
     id: number;
-    imageUrl: string; // `public` に配置された画像パスを使用
+    imageUrl: string;
     title: string;
     price: number;
     likes: number;

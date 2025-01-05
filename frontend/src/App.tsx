@@ -1,7 +1,7 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { CssBaseline, ThemeProvider, Container } from "@mui/material";
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import {Container, CssBaseline, ThemeProvider} from "@mui/material";
 import theme from "./theme";
-import { RecoilRoot } from "recoil";
+import {RecoilRoot} from "recoil";
 
 // ページコンポーネントのインポート
 import Home from "./pages/Home";
@@ -13,16 +13,16 @@ import Header from "./components/common/Header.tsx";
 const App = () => {
     return (
         <ThemeProvider theme={theme}>
-            <CssBaseline />
+            <CssBaseline/>
             <RecoilRoot>
                 <Router>
-                    <Header />
+                    <Header/>
                     <Container>
                         <Routes>
                             {/* ルートページ */}
-                            <Route path="/" element={<Home />} />
+                            <Route path="/" element={<Home/>}/>
                             {/* WeatherReportページ */}
-                            <Route path="/product-detail" element={<ProductDetail />} />
+                            <Route path="/product/:id" element={<ProductDetail/>}/>
                         </Routes>
                     </Container>
                 </Router>

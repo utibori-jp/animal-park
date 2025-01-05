@@ -1,8 +1,10 @@
 import React from 'react';
 import {Box, Button, IconButton, Modal, Typography} from '@mui/material';
 import {Close as CloseIcon} from '@mui/icons-material';
+import {useNavigate} from "react-router-dom";
 
 interface PreviewModalProps {
+    id: number,
     open: boolean;
     onClose: () => void;
     imageUrl: string;
@@ -12,13 +14,13 @@ interface PreviewModalProps {
 }
 
 const PreviewModal: React.FC<PreviewModalProps> = ({
+                                                       id,
                                                        open,
                                                        onClose,
                                                        imageUrl,
                                                        title,
-                                                       brandName,
-                                                       price,
                                                    }) => {
+    const navigate = useNavigate()
     return (
         <Modal open={open} onClose={onClose}>
             <Box
@@ -35,8 +37,8 @@ const PreviewModal: React.FC<PreviewModalProps> = ({
                 }}
             >
                 <Box display="flex" justifyContent="space-between" alignItems="center">
-                    <Typography variant="h6" component="h2">
-                        プレビュー
+                    <Typography variant="h6" mt={2}>
+                        {title}
                     </Typography>
                     <IconButton onClick={onClose} aria-label="close">
                         <CloseIcon/>
@@ -48,20 +50,12 @@ const PreviewModal: React.FC<PreviewModalProps> = ({
                          style={{maxWidth: '100%', maxHeight: '400px', objectFit: 'contain'}}/>
                 </Box>
 
-                <Typography variant="h6" mt={2}>
-                    {title}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                    ブランド: {brandName}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                    価格: {price}円
-                </Typography>
+
                 <Box mt={2}>
                     <Button variant="contained" color="primary" onClick={() => {
-                        /*TODO: 画像詳細ページに遷移する */
+                        navigate(`/product/${id}`);
                     }}>
-                        ダウンロード
+                        詳細画面へ
                     </Button>
                 </Box>
             </Box>
