@@ -1,11 +1,5 @@
-import axios from 'axios';
-
-const axiosInstance = axios.create({
-    baseURL: 'http://localhost:3001',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-});
+import axios from "axios"
+import axiosInstance from '../config/axiosConfig';
 
 const apiService = {
     async fetchImages(params: {
@@ -27,6 +21,18 @@ const apiService = {
             throw error;
         }
     },
+
+    async downloadImage(params: {
+        user: App.User,
+        imageId: string,
+    }) {
+        return await axiosInstance.get('/download', {
+            params: {
+                user: params.user,
+                imageId: params.imageId,
+            },
+        });
+    }
 };
 
 export default apiService;
