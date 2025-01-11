@@ -21,6 +21,7 @@ const PreviewModal: React.FC<PreviewModalProps> = ({
                                                        title,
                                                    }) => {
     const navigate = useNavigate()
+    console.log(imageUrl)
     return (
         <Modal open={open} onClose={onClose}>
             <Box

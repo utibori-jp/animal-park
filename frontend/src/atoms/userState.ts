@@ -1,12 +1,10 @@
-import { atom } from 'recoil';
+import {atom} from 'recoil';
 
-interface UserState {
-    currencyBalance: number;
-}
-
-export const userState = atom<UserState>({
-    key: 'userState',
+export const userState = atom<App.User>({
+    key: 'userState', // Atom の一意なキー
     default: {
+        userId: "",
+        userName: "",
         currencyBalance: 12345,
     },
 });

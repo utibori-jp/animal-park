@@ -95,6 +95,7 @@ const Home: React.FC = () => {
             {/* プレビュー モーダル */}
             {selectedImage && (
                 <PreviewModal
+                    id={selectedImage.id}
                     open={previewOpen}
                     onClose={handleClosePreview}
                     imageUrl={selectedImage.imageUrl}
